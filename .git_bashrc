@@ -1,0 +1,51 @@
+ga() {
+	git add "$@"
+}
+gc() {
+	git switch $1
+}
+gcb() {
+	git switch -c $1
+}
+gcbf() {
+	gcb feature/$1
+}
+grh() {
+	git reset --hard HEAD~${1:-0}
+}
+grho() {
+	git reset --hard origin/$(git branch --show-current)
+}
+grs() {
+	git restore --staged "$@"
+}
+gcm() {
+	git commit -m "$*"
+}
+gcam() {
+	git commit -am "$*"
+}
+gash() {
+	git rev-parse HEAD~${1:-0} | tr -d '\n' | xclip -selection c
+}
+gcp() {
+	git cherry-pick $(xclip -o -selection c)
+}
+gtag() {
+	git name-rev --tags --name-only $1
+}
+crecentb() {
+	git switch $(recentb | sed -n ${1:-1}p)
+}
+
+alias gs="git status"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias gp="git pull"
+alias gb="git branch"
+alias branch="git branch --show-current"
+alias branchc="branch | xclip -selection c"
+alias stash="git stash"
+alias pop="git stash pop"
+alias recentb="git reflog | grep 'checkout:' | tr ' ' '\n' | grep feature/ | grep -v origin | grep -v 'refs/heads' | awk '!x["\$"0]++'"
+alias recentbl="recentb | less"

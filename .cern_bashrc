@@ -1,0 +1,5 @@
+alias vpc="ssh $VPC"
+
+sucap() { ssh cs-ccr-ucap$1.cern.ch; } 
+
+alias home='~/code/tales-from-the-loop/setup-workenv.sh'

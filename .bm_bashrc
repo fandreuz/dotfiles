@@ -1,0 +1,6 @@
+yba() {
+   yabm bookmark add "$1"
+}
+ybt() {
+   yabm bookmark tag $@
+}
