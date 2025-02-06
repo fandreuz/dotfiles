@@ -1,8 +1,0 @@
-export JBL_MAC=2C:FD:B4:3E:0F:6A
-export XM4_MAC=AC:80:0A:09:3F:D8
-
-alias bluetoothjbl='bluetoothctl connect $JBL_MAC'
-alias bluetoothxm4='bluetoothctl connect $XM4_MAC'
-
-alias dbluetoothjbl='bluetoothctl disconnect $JBL_MAC'
-alias dbluetoothxm4='bluetoothctl disconnect $XM4_MAC'
