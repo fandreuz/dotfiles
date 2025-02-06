@@ -1,0 +1,6 @@
+#!/bin/bash
+
+btconnect () {
+	device=$(bluetoothctl devices | grep -i "$1" | awk '{print $2}')
+	bluetoothctl connect "$device"
+}

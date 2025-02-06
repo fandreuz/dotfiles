@@ -1,0 +1,27 @@
+#!/bin/bash
+
+export SW_DIR=$HOME/software
+mkdir -p "$SW_DIR"
+
+export SW_OUTPUT_DIR=$HOME/software/output
+mkdir -p "$SW_OUTPUT_DIR"
+
+runsh () {
+	executable=$(find "$SW_DIR" -executable -name "$1.sh")
+
+	occurrences=$(echo "$executable" | wc -l)
+	if [ "$occurrences" -eq 0 ]; then
+		echo "Not found: $1"
+		exit 1
+	fi
+
+	if [ "$occurrences" -gt 1 ]; then
+		echo "Found too many occurrences"
+		echo "$occurrences"
+		exit 1
+	fi
+
+	output_file="$SW_OUTPUT_DIR/$1.out"
+	error_file="$SW_OUTPUT_DIR/$1.err"
+	nohup "$executable" > "$output_file" 2> "$error_file" &
+}
