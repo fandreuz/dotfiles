@@ -1,20 +1,36 @@
+#!/bin/bash
+
+alias gs='git status'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gp='git pull'
+alias gb='git branch'
+alias branch='git branch --show-current'
+alias branchc='branch | xclip -selection c'
+alias stash='git stash'
+alias pop='git stash pop'
+# shellcheck disable=SC2142
+alias uniqawk='awk "!a[\$0]++{print}"'
+# shellcheck disable=SC2142
+alias recentb="git reflog | grep 'checkout:' | awk '{print \$8}' | uniqawk"
+
 ga() {
 	git add "$@"
 }
 gc() {
-	git switch $1
+	git switch "$1"
 }
 gcb() {
-	git switch -c $1
+	git switch -c "$1"
 }
 gcbf() {
-	gcb feature/$1
+	gcb "feature/$1"
 }
 grh() {
-	git reset --hard HEAD~${1:-0}
+	git reset --hard HEAD~"${1:-0}"
 }
 grho() {
-	git reset --hard origin/$(git branch --show-current)
+	git reset --hard "origin/$(git branch --show-current)"
 }
 grs() {
 	git restore --staged "$@"
@@ -26,26 +42,16 @@ gcam() {
 	git commit -am "$*"
 }
 gash() {
-	git rev-parse HEAD~${1:-0} | tr -d '\n' | xclip -selection c
+	git rev-parse HEAD~"${1:-0}" | tr -d '\n' | xclip -selection c
 }
 gcp() {
-	git cherry-pick $(xclip -o -selection c)
+	commit=$(xclip -o -selection c)
+	git cherry-pick "$commit"
 }
 gtag() {
-	git name-rev --tags --name-only $1
+	git name-rev --tags --name-only "$1"
 }
 crecentb() {
-	git switch $(recentb | sed -n ${1:-1}p)
+	branch=$(recentb | sed -n "${1:-1}p")
+	git switch "$branch"
 }
-
-alias gs="git status"
-alias gd="git diff"
-alias gds="git diff --staged"
-alias gp="git pull"
-alias gb="git branch"
-alias branch="git branch --show-current"
-alias branchc="branch | xclip -selection c"
-alias stash="git stash"
-alias pop="git stash pop"
-alias recentb="git reflog | grep 'checkout:' | tr ' ' '\n' | grep feature/ | grep -v origin | grep -v 'refs/heads' | awk '!x["\$"0]++'"
-alias recentbl="recentb | less"
