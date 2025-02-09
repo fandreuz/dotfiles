@@ -3,16 +3,15 @@
 alias gs='git status'
 alias gd='git diff'
 alias gds='git diff --staged'
-alias gp='git pull'
 alias gb='git branch'
 alias branch='git branch --show-current'
 alias branchc='branch | xclip -selection c'
 alias stash='git stash'
 alias pop='git stash pop'
 # shellcheck disable=SC2142
-alias uniqawk='awk "!a[\$0]++{print}"'
+alias _uniqawk='awk "!a[\$0]++{print}"'
 # shellcheck disable=SC2142
-alias recentb="git reflog | grep 'checkout:' | awk '{print \$8}' | uniqawk"
+alias recentb="git reflog | grep 'checkout:' | awk '{print \$8}' | _uniqawk"
 
 ga() {
 	git add "$@"
