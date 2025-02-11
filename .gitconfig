@@ -1,0 +1,31 @@
+[user]
+	email = andreuzzi.francesco@gmail.com
+	name = Francesco Andreuzzi
+[alias]
+    # `git log` with patches shown with difftastic.
+    dlog = -c diff.external=difft log -p --ext-diff
+
+    # Show the most recent commit with difftastic.
+    dshow = -c diff.external=difft show --ext-diff
+
+    # `git diff` with difftastic.
+    ddiff = -c diff.external=difft diff
+
+    a = add
+    b = branch
+    cam =  commit --all --message
+    cb = branch --show-current
+    cm = commit --message
+    cp = "!f() { git cherry-pick \"$(pclip)\" }; f"
+    d = diff
+    ds = diff --staged
+    h = "!f() { source $HOME/.bashrc && git rev-parse HEAD~\"${1:-0}\" | tr -d '\n'; }; f"
+    p = stash pop
+    recentb = "!f() { git reflog | grep 'checkout:' | awk '{print $8}' | awk '!a[$0]++{print}'; }; f"
+    res = restore --staged
+    rth = reset --hard
+    s = status
+    st = stash
+    sw = switch
+    swb = switch -b
+    swrecentb = "!f() { git switch $(git recentb | sed -n \"${1:-1}p\"); }; f"
