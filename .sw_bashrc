@@ -26,13 +26,13 @@ _run_program() {
 }
 
 runbin () {
-	executable=$(find "$SW_DIR" -executable -name "$1")
+	executable=$(find "$SW_DIR" -type f -executable -name "$1")
 	_check_occurrences "$executable"
 	_run_program "$1" "$executable"
 }
 
 runimg () {
-	executable=$(find "$SW_DIR" -iregex ".*$1.*\.AppImage")
+	executable=$(find "$SW_DIR" -type f -executable -iregex ".*$1.*\.AppImage")
 	_check_occurrences "$executable"
 	_run_program "$1" "$executable"
 }
