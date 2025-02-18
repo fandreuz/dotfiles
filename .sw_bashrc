@@ -36,9 +36,3 @@ runimg () {
 	_check_occurrences "$executable"
 	_run_program "$1" "$executable"
 }
-
-asprof () {
-	executable=$(find "$SW_DIR" -type f -executable -iregex ".*async.*/bin/asprof")
-	_check_occurrences "$executable"
-	$executable "$@"
-}

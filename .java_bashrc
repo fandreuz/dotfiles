@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source "$HOME/.sw_bashrc"
+
+_export_asprof_lib () {
+	lib=$(find "$SW_DIR" -type f -iregex ".*async.*/lib/.*\.so")
+	_check_occurrences "$lib"
+	export LIB_ASYNCPROF="$lib"
+}
+_export_asprof_lib
+
+asprof () {
+	executable=$(find "$SW_DIR" -type f -executable -iregex ".*async.*/bin/asprof")
+        _check_occurrences "$executable"
+        $executable "$@"
+}
