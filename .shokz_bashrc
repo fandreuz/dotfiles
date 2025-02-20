@@ -1,0 +1,18 @@
+#!/bin/bash
+
+mp3speedup() (
+    set -o errexit
+    TMP_NAME=/tmp/speedup.mp3
+    rm -f "$TMP_NAME"
+    ffmpeg -i "$1" -map 0:a -filter:a "atempo=${2:-1.5}" -f mp3 "$TMP_NAME"
+    mv "$TMP_NAME" "$1"
+)
+
+mp3split() (
+    filename=$(basename -- "$1")
+    filenamenoext="${filename%.*}"
+    suffix=-%03d.mp3
+    segment_length_s=600
+
+    ffmpeg -f mp3 -i "$1" -f segment -segment_time $segment_length_s -segment_start_number 1 -c:a copy "$filenamenoext$suffix"
+)
